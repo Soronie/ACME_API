@@ -1,0 +1,31 @@
+{
+  "name": "acme_api",
+  "version": "1.0.0",
+  "description": "Produces a truth wall",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soronie/ACME_API.git"
+  },
+  "keywords": [
+    "acme",
+    "api",
+    "truth",
+    "wall"
+  ],
+  "author": "Rafaeli Arroyo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soronie/ACME_API/issues"
+  },
+  "homepage": "https://github.com/Soronie/ACME_API#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "request": "^2.82.0"
+  }
+}
