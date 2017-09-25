@@ -1,86 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		#truth_wall {
-			max-width: 500px;
-			max-height: 200px;
-            min-width: 500px;
-            min-height: 200px;
-			margin: auto;
-			background-color: yellow;
-		}
-
-		#truth_button {
-			width: 100%;
-			min-height: 200px;
-            max-height: 200px;
-			background-color: darkorange;
-			display: flex;
-  			align-items: center;
-  			justify-content: center;
-		}
-
-	</style>
 </head>
 <body>
-	<div class="wrap" id="truth_wall" align="center">
-		<div id="truth_button">
-			<button onclick="newTruth();">Truth</button>
+	<div id="truth_wall" align="center">
+		<div id="truth_window">
+			<button id="truth_button" onclick="newTruth();">Truth</button>
 		</div>
-		<script>
-			function newTruth() {
-    			$.getJSON('http://api.acme.international/fortune', function(data) {
-    				// Form message obtained from GET request
-    				var message = ''
-    				for (var i = 0; i < data.fortune.length; i++)
-    					message += data.fortune[i] + '\n';
-
-    				// Create a new container that contains the truth message
-    				// then add onto HTML page
-    				var parent = document.getElementById('truth_wall');
-                    var newWindow = document.createElement('div');
-                    // Place text within a new container
-                    // then append to new window
-                    var newText = document.createElement('div');
-                    newText.innerHTML = message;
-                    newWindow.appendChild(newText);
-
-
-    				newWindow.style.width = parent.offsetWidth * 0.5 + 'px';
-    				newWindow.style.height = '200px';
-                    newWindow.style.display = 'flex';
-                    newWindow.style.alignItems = 'center';
-                    newWindow.style.justifyContent = 'center';
-    				newWindow.style.backgroundColor = 'maroon';
-
-                    truth_button = document.getElementById('truth_button');
-                    truth_button.remove();
-
-                    // For an even number of bricks, align to the left
-    				if(parent.childElementCount % 2 == 0)
-                    {
-    					newWindow.style.float = 'left';
-                        truth_button.style.width = '50%';
-
-                    }
-                    // For an odd number, align to the right
-    				else
-                    {
-    					newWindow.style.float = 'right';
-                        truth_button.style.width = '100%';
-                    }
-                    
-    				parent.appendChild(newWindow);
-                    parent.appendChild(truth_button);
-
-    			}).fail(function(){
-    				// If the request fails, re-attempt
-    				getTruth();
-    			});
-			}
-		</script>
 	<div>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </body>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="app/properties.css">
+	<script src="app/api.js"></script>
 </html>

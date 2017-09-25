@@ -1,0 +1,20 @@
+#truth_wall {
+	max-width: 500px;
+	max-height: 200px;
+    min-width: 500px;
+    min-height: 200px;
+	margin: auto;
+	background-color: yellow;
+}
+
+#truth_window {
+	width: 100%;
+	min-height: 200px;
+    max-height: 200px;
+	background-color: darkorange;
+	display: flex;
+}
+
+#truth_button {
+    margin: auto;
+}
