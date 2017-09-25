@@ -1,3 +1,13 @@
+const hard_truth = 'The future is ours to decide!';
+
+function randomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++)
+        color += letters[Math.floor(Math.random() * 16)];
+    return color;
+}
+
 function changeTruthWindow(children, tw) {
     if(children % 2 == 0)
         tw.style.width = '50%';
@@ -8,7 +18,6 @@ function changeTruthWindow(children, tw) {
 function makeCloseButton() {
     var close_button = document.createElement('button');
     var span = document.createElement('span');
-    //close_button.type = 'button';
     close_button.className = 'truth';
     close_button.setAttribute('aria-label', 'Close');
     close_button.style.height = '20px';
@@ -18,13 +27,38 @@ function makeCloseButton() {
     return close_button;
 }
 
-function newTruth() {
+function newTruth(queried) {
+    var truth = '';
+
+    // If querying, start 10 second timer
+    if(queried)
+    {
+        setTimeout(function() {
+            if(!truth)
+                makeNewWindow(hard_truth);
+        }, 10000);
+    }
+
+    // GET request. If data is obtained, form the message
     $.getJSON('http://api.acme.international/fortune', function(data) {
         // Form message obtained from GET request
-        var message = ''
         for (var i = 0; i < data.fortune.length; i++)
-            message += data.fortune[i] + '\n';
+            truth += data.fortune[i] + '\n';
 
+        // Only make the window within original function call
+        if(queried)
+            makeNewWindow(truth);
+
+    }).fail(function(){
+        // If the request fails, recurse until a valid truth is found
+        // or 10 seconds are up.
+        truth = newTruth(false);
+    });
+
+    return truth;
+}
+
+function makeNewWindow(message) {
         // Create a new container that contains the truth message
         // then add onto HTML page
         var parent = document.getElementById('truth_wall');
@@ -44,7 +78,7 @@ function newTruth() {
         newWindow.appendChild(newText);
         newWindow.style.width = parent.offsetWidth * 0.5 + 'px';
         newWindow.style.height = '200px';
-        newWindow.style.backgroundColor = 'maroon';
+        newWindow.style.backgroundColor = randomColor();
 
         // For an even number of bricks, align to the right
         if(parent.childElementCount % 2 == 0)
@@ -57,8 +91,4 @@ function newTruth() {
         parent.appendChild(newWindow);
         parent.appendChild(truth_window);
         changeTruthWindow(parent.childElementCount-1, truth_window);
-    }).fail(function(){
-            // If the request fails, re-attempt
-            newTruth();
-    });
 }
