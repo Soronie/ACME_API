@@ -18,7 +18,7 @@ window.onload = function() {
 // and adjust the truth window size
 $(document).on('click', '.truth', function () {
     this.parentNode.remove();
-    changeTruthWindow(document.getElementById('truth_wall').childElementCount-2,
+    changeTruthWindow(document.getElementById('truth_wall').childElementCount-1,
         document.getElementById('truth_window'));
 });
 
@@ -38,6 +38,7 @@ function changeTruthWindow(children, tw) {
     if(percentage == 0)
         percentage = 100;
     tw.style.width = percentage + '%';
+    console.log(children);
 }
 
 // Create close button (Bootstrap)
@@ -97,7 +98,7 @@ function makeNewWindow(message) {
         
         // Place text within a new container
         // Create the close button
-        var newText = document.createElement('span');
+        var newText = document.createElement('div');
         var close_button = makeCloseButton();
 
         // Set a default text size and center the contained message
@@ -119,7 +120,7 @@ function makeNewWindow(message) {
         truth_window.remove();
         parent.appendChild(newWindow);
         parent.appendChild(truth_window);
-        changeTruthWindow(parent.childElementCount-2, truth_window);
+        changeTruthWindow(parent.childElementCount-1, truth_window);
 
         // If the text overflows the truth window, adjust the size
         while(newText.offsetHeight > newWindow.offsetHeight)
