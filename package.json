@@ -25,7 +25,7 @@
   "homepage": "https://github.com/Soronie/RNG_Truths#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.15.4",
+    "express": "^4.15.5",
     "request": "^2.82.0"
   }
 }
