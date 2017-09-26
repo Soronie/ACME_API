@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Soronie/ACME_API.git"
+    "url": "git+https://github.com/Soronie/RNG_Truths.git"
   },
   "keywords": [
     "acme",
@@ -20,9 +20,9 @@
   "author": "Rafaeli Arroyo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Soronie/ACME_API/issues"
+    "url": "https://github.com/Soronie/RNG_Truths/issues"
   },
-  "homepage": "https://github.com/Soronie/ACME_API#readme",
+  "homepage": "https://github.com/Soronie/RNG_Truths#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.15.4",

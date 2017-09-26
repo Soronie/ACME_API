@@ -9,18 +9,19 @@ function randomColor() {
 }
 
 function changeTruthWindow(children, tw) {
-    if(children % 2 == 0)
-        tw.style.width = '50%';
-    else
-        tw.style.width = '100%';
+    var percentage = 100*(4-(children % 4))/4;
+    if(percentage == 0)
+        percentage = 100;
+    tw.style.width = percentage + '%';
 }
 
 function makeCloseButton() {
     var close_button = document.createElement('button');
     var span = document.createElement('span');
-    close_button.className = 'truth';
+    close_button.className = 'close';
     close_button.setAttribute('aria-label', 'Close');
-    close_button.style.height = '20px';
+    close_button.style.float = 'right';
+    close_button.style.height = '30px';
     span.setAttribute('aria-hidden', true);
     span.innerHTML = '&times;';
     close_button.appendChild(span);
@@ -67,28 +68,29 @@ function makeNewWindow(message) {
         
         // Place text within a new container
         // then append to new window
-        var newText = document.createElement('div');
+        var newText = document.createElement('span');
         var close_button = makeCloseButton();
+        newWindow.style.display = 'inline-flex';
+        newWindow.style.verticalAlign = 'top';
+        newWindow.style.width = parent.offsetWidth/4 + 'px';
+        newWindow.style.height = '200px';
+        newWindow.style.backgroundColor = randomColor();
+        newText.innerHTML = message;
+        newText.style.fontSize = '20px';
+        newText.style.margin = 'auto';
+        newText.style.marginLeft = '25px';
+        newWindow.appendChild(newText);
         newWindow.appendChild(close_button);
         close_button.onclick = function() {
             this.parentNode.remove();
-            changeTruthWindow(parent.childElementCount-1, truth_window);
+            changeTruthWindow(parent.childElementCount-2, truth_window);
         }
-        newText.innerHTML = message;
-        newWindow.appendChild(newText);
-        newWindow.style.width = parent.offsetWidth * 0.5 + 'px';
-        newWindow.style.height = '200px';
-        newWindow.style.backgroundColor = randomColor();
-
-        // For an even number of bricks, align to the right
-        if(parent.childElementCount % 2 == 0)
-            newWindow.style.float = 'left';
-        // For an odd number, align to the left
-        else
-            newWindow.style.float = 'right';
 
         truth_window.remove();
         parent.appendChild(newWindow);
         parent.appendChild(truth_window);
-        changeTruthWindow(parent.childElementCount-1, truth_window);
+        changeTruthWindow(parent.childElementCount-2, truth_window);
+
+        while(newText.offsetHeight > newWindow.offsetHeight)
+            newText.style.fontSize = 'smaller';
 }
