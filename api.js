@@ -1,5 +1,7 @@
 // Hard-coded truth value displayed after 10 seconds
-const hard_truth = 'The future is ours to decide!';
+const hard_truth = "What's important isn't whether you can see the future or not. " +
+    "It's the will to make a choice, and the strength to seize your destiny! " + 
+    "Our time has come. Our destiny is our own!\n--Shulk from Xenoblade Chronicles";
 
 // Save data before refreshing
 window.onbeforeunload = function() {
