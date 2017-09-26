@@ -103,6 +103,7 @@ function makeNewWindow(message) {
         var close_button = makeCloseButton();
 
         // Set a default text size and center the contained message
+        newText.className = 'text';
         newText.style.fontSize = '20px';
         newText.style.margin = 'auto';
         newText.style.marginLeft = '25px';
@@ -125,5 +126,5 @@ function makeNewWindow(message) {
 
         // If the text overflows the truth window, adjust the size
         while(newText.offsetHeight > newWindow.offsetHeight)
-            newText.style.fontSize = 'smaller';
+            newText.style.fontSize = parseInt(newText.style.fontSize)-1 + 'px';
 }
