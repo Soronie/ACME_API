@@ -1,5 +1,5 @@
 {
-  "name": "acme_api",
+  "name": "rng_truths",
   "version": "1.0.0",
   "description": "Produces a truth wall",
   "main": "server.js",
