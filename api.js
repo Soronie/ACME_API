@@ -38,7 +38,6 @@ function changeTruthWindow(children, tw) {
     if(percentage == 0)
         percentage = 100;
     tw.style.width = percentage + '%';
-    console.log(children);
 }
 
 // Create close button (Bootstrap)
