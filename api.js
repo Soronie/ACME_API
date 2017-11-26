@@ -57,36 +57,21 @@ function makeCloseButton() {
 }
 
 // Truth button was pressed: Initiate GET request and timer
-function newTruth(queried) {
-    var truth = '';
-
-    // If querying, start 10 second timer
-    if(queried)
-    {
-        // Make a hard-coded truth if the timer is up
-        setTimeout(function() {
-            if(!truth)
-                makeNewWindow(hard_truth);
-        }, 10000);
-    }
-
+function newTruth() {
     // GET request. If data is obtained, form the message
     $.getJSON('http://api.acme.international/fortune', function(data) {
+        var truth = '';
         // Form message obtained from GET request
         for (var i = 0; i < data.fortune.length; i++)
             truth += data.fortune[i] + '\n';
 
-        // Only make the new window from the original function call
-        if(queried)
-            makeNewWindow(truth);
+        makeNewWindow(truth);
 
     }).fail(function(){
         // If the request fails, recurse until a valid truth is found
         // or 10 seconds are up.
-        truth = newTruth(false);
+        makeNewWindow(hard_truth);
     });
-
-    return truth;
 }
 
 // Produce the truth window. Contains message and close button
